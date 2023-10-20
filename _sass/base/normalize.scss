@@ -22,6 +22,8 @@
 
 body {
   margin: 0;
+  color: #0b2262;
+  background-color: #0b2262;
 }
 
 /**
@@ -62,7 +64,7 @@ hr {
  */
 
 pre {
-  font-family: monospace, monospace; /* 1 */
+  font-family: 'Lato', monospace; /* 1 */
   font-size: 1em; /* 2 */
 }
 
@@ -74,7 +76,7 @@ pre {
  */
 
 a {
-  background-color: transparent;
+  color: #b2f218;
 }
 
 /**
@@ -105,7 +107,7 @@ strong {
 code,
 kbd,
 samp {
-  font-family: monospace, monospace; /* 1 */
+  font-family: 'Lato', monospace; /* 1 */
   font-size: 1em; /* 2 */
 }
 
