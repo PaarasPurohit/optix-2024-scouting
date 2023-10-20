@@ -51,13 +51,13 @@ Limitations (as of 10/19/2023):
         tr:nth-child(even) {
             background-color: #091b4f;
         }
-        .red-background {
-            background-color: red;
+        .winner-background {
+            background-color: #FFA500;
         }
-        .yellow-background {
-            background-color: yellow;
+        .impact-background {
+            background-color: #61C0BF;
         }
-        .green-background {
+        .rei-background {
             background-color: green;
         }
     </style>
@@ -129,11 +129,11 @@ Limitations (as of 10/19/2023):
                 cells.forEach(cell => {
                     const text = cell.textContent;
                     if (text.includes("Regional Winners")) {
-                        cell.classList.add("red-background");
+                        cell.classList.add("winner-background");
                     } else if (text.includes("Regional Chairman's Award") || text.includes("Regional FIRST Impact Award")) {
-                        cell.classList.add("yellow-background");
+                        cell.classList.add("impact-background");
                     } else if (text.includes("Regional Engineering Inspiration Award")) {
-                        cell.classList.add("green-background");
+                        cell.classList.add("rei-background");
                     }
                 });
             });
