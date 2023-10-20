@@ -81,15 +81,13 @@ Limitations (as of 10/19/2023):
     </table>
     <script>
         function fetchAwards() {
-            // Clear existing rows in the table (except headers)
             const dataTable = document.getElementById("data-table");
             const tbody = dataTable.querySelector("tbody");
-            tbody.innerHTML = ""; // Remove all rows
+            tbody.innerHTML = "";
             const teamNumber = document.getElementById("teamNumber").value;
             const apiKey = "IJGdHobToWBkfqCzNHRKGWKyy66mMiOl7A7IOs1WjcgfS4d6sIryBqQWsALTPTVv";
             const apiUrl = "https://www.thebluealliance.com/api/v3";
-            const teamKey = "frc" + teamNumber; // Replace with the team key you want to retrieve awards for
-            // Define the endpoint and parameters
+            const teamKey = "frc" + teamNumber;
             const endpoint = `/team/${teamKey}/awards`;
             const requestUrl = `${apiUrl}${endpoint}`;
             fetch(requestUrl, {
@@ -101,14 +99,11 @@ Limitations (as of 10/19/2023):
             .then(data => {
                 if (Array.isArray(data)) {
                     console.log(data);
-                    // Iterate through the award data and create table rows
                     data.forEach(award => {
-                        const row = dataTable.insertRow();         
-                        // Create cells for each piece of data
+                        const row = dataTable.insertRow();
                         const awardNameCell = row.insertCell(0);
                         const eventNameCell = row.insertCell(1);
                         const yearCell = row.insertCell(2);
-                        // Populate the cells with award data
                         awardNameCell.textContent = award.name;
                         eventNameCell.textContent = award.event_name;
                         yearCell.textContent = award.year;
