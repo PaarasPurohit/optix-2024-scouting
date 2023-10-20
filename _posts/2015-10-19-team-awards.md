@@ -1,5 +1,5 @@
 ---
-title: "test"
+title: "Team Awards"
 layout: post
 date: 2015-10-19 22:48
 image: /assets/images/profile.png
@@ -10,7 +10,7 @@ tag:
 - extra
 category: blog
 author: jamesfoster 
-description: test
+description: Get the list of teams' awards they've won
 ---
 
 # Team Awards
