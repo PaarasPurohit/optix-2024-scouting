@@ -20,6 +20,8 @@ On this page, you can:
 
 - Enter any FRC team's team number and get all the awards they've ever won any year.
 - Parse through the data specifically for our Outreach department
+- Compare other teams' data to our (Team Optix 3749) own.
+    * If there is a note at the bottom about either regional winning, outreach, or engineering inspiration, it is because the amount of times the desired team has won those awards is greater than or equal to our own.
 
 Limitations (as of 10/19/2023):
 
@@ -31,6 +33,22 @@ Limitations (as of 10/19/2023):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team Awards</title>
     <style>
+        input[type="text"] {
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #0bbcd2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
         p, table, thead, tr, th, td, tbody {
             color: white;
         }
@@ -65,8 +83,10 @@ Limitations (as of 10/19/2023):
 <body>
     <p>Enter a team number:</p>
     <input id="teamNumber" type="text">
+    <br><br>
     <button onclick="fetchAwards()">Get Awards</button>
     <button onclick="parseAwards()">Parse Awards</button>
+    <button onclick="compareAwards()">Compare to Optix Stats</button>
     <table id="data-table">
         <thead>
             <tr>
@@ -79,12 +99,22 @@ Limitations (as of 10/19/2023):
             <!-- Data will be displayed here -->
         </tbody>
     </table>
+    <p id="winnerReport"></p>
+    <p id="impactReport"></p>
+    <p id="reiReport"></p>
     <script>
+        const optixRegional = 0;
+        const optixImpact = 2;
+        const optixREI = 1;
+        let regionalWinners = 0;
+        let impactWinners = 0;
+        let reiWinners = 0;
+        let teamNumber;
         function fetchAwards() {
+            teamNumber = document.getElementById("teamNumber").value;
             const dataTable = document.getElementById("data-table");
             const tbody = dataTable.querySelector("tbody");
             tbody.innerHTML = "";
-            const teamNumber = document.getElementById("teamNumber").value;
             const apiKey = "IJGdHobToWBkfqCzNHRKGWKyy66mMiOl7A7IOs1WjcgfS4d6sIryBqQWsALTPTVv";
             const apiUrl = "https://www.thebluealliance.com/api/v3";
             const teamKey = "frc" + teamNumber;
@@ -107,7 +137,16 @@ Limitations (as of 10/19/2023):
                         awardNameCell.textContent = award.name;
                         eventNameCell.textContent = award.event_name;
                         yearCell.textContent = award.year;
+                        if (award.name.includes("Regional Winners") || award.name.includes("Winner")) {
+                            regionalWinners++;
+                        } else if (award.name.includes("Regional Chairman's Award") || award.name.includes("Regional FIRST Impact Award")) {
+                            impactWinners++;
+                        } else if (award.name.includes("Regional Engineering Inspiration Award")) {
+                            reiWinners++;
+                        }
                     });
+                    parseAwards();
+                    compareAwards();
                 } else {
                     console.error("Data received from the API is not an array.");
                 }
@@ -123,7 +162,7 @@ Limitations (as of 10/19/2023):
                 const cells = row.querySelectorAll("td");
                 cells.forEach(cell => {
                     const text = cell.textContent;
-                    if (text.includes("Regional Winners")) {
+                    if (text.includes("Regional Winners") || text.includes("Winner")) {
                         cell.classList.add("winner-background");
                     } else if (text.includes("Regional Chairman's Award") || text.includes("Regional FIRST Impact Award")) {
                         cell.classList.add("impact-background");
@@ -132,6 +171,18 @@ Limitations (as of 10/19/2023):
                     }
                 });
             });
+        }
+        function compareAwards() {
+            teamNumber = document.getElementById("teamNumber").value;
+            if (regionalWinners >= optixRegional) {
+                document.getElementById("winnerReport").innerHTML = "We would benefit from scouting team " + teamNumber + "'s regional winning/robotics performance."
+            }
+            if (impactWinners >= optixImpact) {
+                document.getElementById("impactReport").innerHTML = "We would benefit from scouting team " + teamNumber + "'s outreach."
+            }
+            if (reiWinners >= optixREI) {
+                document.getElementById("reiReport").innerHTML = "We would benefit from scouting team " + teamNumber + "'s engineering inspiration."
+            }
         }
     </script>
 </body>
