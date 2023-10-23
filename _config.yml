@@ -1,6 +1,8 @@
 # main text of home
 title: Optix Regional Scouting
-bio: Team Optix 3749 is an FRC team in Del Norte High, San Diego, CA. Website by Paaras Purohit.
+bio: > 
+  Team Optix 3749 is an FRC team in Del Norte High, San Diego, CA. 
+  Website by Paaras Purohit.
 
 # twitter summary info
 description: Scouting for Team Optix regional competitions since 2024

@@ -26,6 +26,7 @@ On this page, you can:
 Limitations (as of 10/19/2023):
 
 - You must refresh the page every time you want a new team's data. If this is not done, data will stack and you won't be able to tell whose data is whose.
+- Due to TheBlueAlliance policies as of now, event names are not able to be revealed. Work is being done on it.
 
 <html lang="en">
 <head>
